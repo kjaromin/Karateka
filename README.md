@@ -1,6 +1,6 @@
 # The Breaking of Karateka
 
-Created for CDM 176- A puzzle game using The Breaking of Karateka
+Created for CDM 176: A spin on The Making of Karateka!
 
 Instructions and builds at: [insert itch page]
 
