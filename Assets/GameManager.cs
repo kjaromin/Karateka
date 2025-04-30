@@ -6,13 +6,14 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
+    // [SerializeField]
     private String[] entries = {
-        "Press the button on page 1 to start the game.",
-        "Turn to page 39."
+        "Press to start the game.",
+        "Turn to page 31.",
+        "Follow the message to obtain the code..."
     };
 
-    int[] code = {4, 6, 1, 1};
+    int[] code = {4, 6, 4, 6};
 
     [SerializeField]
     private TMP_Text label;
@@ -20,6 +21,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject page;
+    
+
+    // [SerializeField]
+    // private GameObject buttonObject;
     
     [SerializeField]
     private TMP_Text key1;
@@ -46,22 +51,22 @@ public class GameManager : MonoBehaviour
         key2Feedback.text = "Correct!";
         page.SetActive(false);
         key1.gameObject.SetActive(false);
-        String karatekaPrompt = code[0].ToString() + ", " + code[1].ToString() + ", _, _. Remember these numbers...";
-        label.text = karatekaPrompt;
+        // String karatekaPrompt = code[0].ToString() + ", " + code[1].ToString() + ", _, _. Remember these numbers...";
+        // label.text = karatekaPrompt;1
 
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(4);
         key2Input.gameObject.SetActive(false);
         key2Feedback.gameObject.SetActive(false);
-        label.text = karatekaPrompt + " 3..";
+        label.text = "Repeat the numbers twice. 4... 6...";
         
-        yield return new WaitForSeconds(1f);
-        label.text = karatekaPrompt + " 2..";
+        // yield return new WaitForSeconds(1f);
+        // label.text = karatekaPrompt + " 2..";
         
-        yield return new WaitForSeconds(1f);
-        label.text = karatekaPrompt + " 1..";
+        // yield return new WaitForSeconds(1f);
+        // label.text = karatekaPrompt + " 1..";
         
-        yield return new WaitForSeconds(1f);
-        Application.Quit(); // Reveals Karateka
+        // yield return new WaitForSeconds(1f);
+        // Application.Quit(); // Reveals Karateka
     }
 
     IEnumerator IncorrectKey2(float delay)
@@ -115,13 +120,22 @@ public class GameManager : MonoBehaviour
         
         // Each stage corresponds to numbers 1-3
         // This will be mapped to our corresponding controller buttons when finished
-        if(Input.GetKeyDown("1")) label.text = entries[1]; // Player presses the start button
-        if(Input.GetKeyDown("2")) page.SetActive(true); // Player turns to page 39
+        if(Input.GetKeyDown("1") && label.text == entries[0])
+        {
+            label.text = entries[1]; // Player presses the start button
+            // buttonObject.setActive(false);
+        }
+        if(Input.GetKeyDown("2") && label.text == entries[1]) label.text = entries[2]; // Player turns to page 39
         if(Input.GetKeyDown("3")) // Player touches 63 to 11
         {
             key1.gameObject.SetActive(true);
+        }
+        if(Input.GetKeyDown("4") && key1.gameObject.activeSelf) // Player touches 63 to 11
+        {
             key2Input.gameObject.SetActive(true);
             key2Feedback.gameObject.SetActive(true);
         }
+
+        // buttonObject.SetActive(true);
     }
 }
